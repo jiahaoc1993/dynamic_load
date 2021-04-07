@@ -7,10 +7,6 @@ class ArchiveImporter:
         self._modules = modules
         self._path = path
     
-    def extract_content(self, path):
-        tar_obj = _get_archive_obj(path)
-        tar_obj.extractall(self._path)
-
 
 def _get_archive_obj(path):
     archive_file = open(path, 'rb')
@@ -22,12 +18,17 @@ def _get_archive_obj(path):
 def _list_archive(archive_obj):
     return archive_obj.getnames()
 
+def _extract_content(archive_obj, path):
+    return archive_obj.extractfile(path)
+
+
 
 #    def find_module(self, fullname, path=None):
 
 
 if __name__ == '__main__':
-    importer = ArchiveImporter(['text'], './test')
-    #tar_obj = _get_archive_obj('./test.tar')
-    #print(_list_archive(tar_obj))
-    importer.extract_content('./test.tar')
+    #importer = ArchiveImporter(['text'], './test')
+    tar_obj = _get_archive_obj('./test.tar')
+    print(_list_archive(tar_obj))
+    print(_extract_content(tar_obj, 'test/test1'))
+    #importer.extract_content('./test.tar')
