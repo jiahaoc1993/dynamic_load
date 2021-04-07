@@ -178,7 +178,7 @@ It is better to not use this class directly, but through its wrappers ('remote_r
         del(self.in_progress[fullname])
         return self
 
-
+    # this part could be replaced with `exec_module` to cut codes
     def load_module(self, name):
         if LEGACY: imp.acquire_lock()
         logger.debug("LOADER=================")
